@@ -1,56 +1,43 @@
 function inOrder(currentNode){
     if(currentNode.left){
-      inOrder(currentNode.left)
+      inOrder(currentNode.left);
     }
-    console.log(currentNode.data)
+    console.log(currentNode.data);
     if(currentNode.right){
-      inOrder(currentNode.right)
+      inOrder(currentNode.right);
     }
-  }
+};
 
-function findOrAdd(rootNode, node){
-    if (rootNode.data === node.data){
-        return true
-        // if the new node is < root node
-    } else if (rootNode.data > node.data ){
-        // if the root node had a node to it's left( < ), recursively run through this function
-        if(!!rootNode.left){
-            return findOrAdd(rootNode.left, node)
-            // if it doesn't have a node to it's left, assign the new node to the left
+function findOrAdd(rootNode, newNode){
+    if (rootNode.data === newNode.data) {
+        return true;
+    } else if (rootNode.data > newNode.data) {
+        if (rootNode.left) {
+            return findOrAdd(rootNode.left, newNode);
         } else {
-            rootNode.left = node
+            rootNode.left = newNode;
         }
-        // else, the new node is > the the rootNode and needs to go to the right
     } else {
-        // if there is already a node assigned to the right
-        if(!!rootNode.right){
-            // recursively run through the function
-            return findOrAdd(rootNode.right, node)
+        if (rootNode.right) {
+            return findOrAdd(rootNode.right, newNode);
         } else {
-            // else, assign the new node to the right
-            rootNode.right = node
+            rootNode.right = newNode;
         }
     }
-}
+};
 
-// the below functions are pretty simple since this tree is sorted with every value < the rootNode to the left, and every value > the rootNode to the right
-
-function max(rootNode){
-    // so if there is a value to the right we know it is > the rootNode
-    if (!!rootNode.right){
-        // recursive
-        return max(rootNode.right)
+function max(node){
+    if (node.right) {
+        return max(node.right);
     } else {
-        // if there is no value to the right, we know we are at the greatest value, so return it
-        return rootNode
+        return node;
     }
-}
+};
 
-// the opposite is true for min
-function min(rootNode){
-    if(!!rootNode.left){
-        return min(rootNode.left)
+function min(node){
+    if (node.left) {
+        return min(node.left);
     } else {
-        return rootNode
+        return node;
     }
-}
+};
